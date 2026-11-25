@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Notification channel for trip alerts (Uber/inDrive style) -->
+    <string name="channel_id_trip_alerts">trip_alerts</string>
+    <string name="channel_name_trip_alerts">Trip Alerts</string>
+    <string name="channel_description_trip_alerts">New order notifications for captains</string>
+
+    <!-- Custom notification sound (if available) -->
+    <!-- The sound file should be placed in res/raw/trip_alert_sound.mp3 -->
+    <!-- If the file is not present, Android will use the default sound -->
+    <string name="trip_alert_sound">trip_alert_sound</string>
+</resources>

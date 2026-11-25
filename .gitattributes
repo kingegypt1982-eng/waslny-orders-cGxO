@@ -1,0 +1,28 @@
+# Default: text files are normalized to LF in the index and checked out using
+# the platform default, so a Windows and a Linux clone diff only real changes.
+* text=auto
+
+# Dart sources are kept CRLF in this working copy (project convention; the
+# repo itself stores them normalized, so this never rewrites committed files).
+*.dart text eol=crlf
+
+# Scripts are authored in CRLF here too.
+*.ps1 text eol=crlf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Never normalize or diff these.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.pdf binary
+*.zip binary
+*.gz binary
+*.db binary
+*.sqlite binary
+*.woff binary
+*.woff2 binary
+*.ttf binary

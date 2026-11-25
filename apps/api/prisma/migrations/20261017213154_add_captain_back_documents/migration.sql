@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "CaptainProfile" ADD COLUMN     "licenseBackDocument" TEXT NOT NULL DEFAULT 'PENDING_UPLOAD',
+ADD COLUMN     "nationalIdBackDocument" TEXT NOT NULL DEFAULT 'PENDING_UPLOAD',
+ADD COLUMN     "vehicleBackDocument" TEXT NOT NULL DEFAULT 'PENDING_UPLOAD';

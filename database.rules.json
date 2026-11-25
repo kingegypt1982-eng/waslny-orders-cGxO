@@ -1,0 +1,21 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "chats": {
+      "$orderId": {
+        "meta": {
+          ".read": "auth != null && (root.child('chats').child($orderId).child('meta').child('clientId').val() === auth.uid || root.child('chats').child($orderId).child('meta').child('captainId').val() === auth.uid || auth.token.role === 'ADMIN')",
+          ".write": false
+        },
+        "messages": {
+          ".read": "auth != null && (root.child('chats').child($orderId).child('meta').child('clientId').val() === auth.uid || root.child('chats').child($orderId).child('meta').child('captainId').val() === auth.uid || auth.token.role === 'ADMIN')",
+          "$messageId": {
+            ".write": "auth != null && !data.exists() && newData.child('senderId').val() === auth.uid && newData.child('content').isString() && newData.child('content').val().length > 0 && newData.child('content').val().length <= 2000",
+            ".validate": "newData.hasChildren(['senderId', 'receiverId', 'role', 'content', 'createdAt']) && newData.child('role').val() === auth.token.role"
+          }
+        }
+      }
+    }
+  }
+}

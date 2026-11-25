@@ -1,0 +1,11 @@
+{
+  "name": "wasalny-orders",
+  "private": true,
+  "workspaces": ["apps/api", "apps/admin"],
+  "scripts": {
+    "dev:api": "npm run start:dev --workspace api",
+    "dev:admin": "npm run dev --workspace admin",
+    "build:api": "npm run build --workspace api",
+    "build:admin": "npm run build --workspace admin"
+  }
+}

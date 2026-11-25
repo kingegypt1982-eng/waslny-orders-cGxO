@@ -1,0 +1,48 @@
+name: waslny_orders
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: waslny_orders_postgres
+    restart: unless-stopped
+    # Credentials come from the environment (root .env, gitignored).
+    # Defaults below are local-dev only and must match DATABASE_URL in apps/api/.env.
+    # They intentionally differ from any other project on this machine.
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-waslny_orders_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change-me-in-root-dot-env}
+      POSTGRES_DB: ${POSTGRES_DB:-waslny_orders_dev}
+    ports:
+      - "${POSTGRES_PORT:-5433}:5432"
+    volumes:
+      - waslny_orders_pgdata:/var/lib/postgresql/data
+    networks:
+      - waslny_orders_net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-waslny_orders_user} -d ${POSTGRES_DB:-waslny_orders_dev}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+  redis:
+    image: redis:7-alpine
+    container_name: waslny_orders_redis
+    restart: unless-stopped
+    ports:
+      - "${REDIS_PORT:-6380}:6379"
+    volumes:
+      - waslny_orders_redisdata:/data
+    networks:
+      - waslny_orders_net
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+volumes:
+  waslny_orders_pgdata:
+    name: waslny_orders_pgdata
+  waslny_orders_redisdata:
+    name: waslny_orders_redisdata
+networks:
+  waslny_orders_net:
+    name: waslny_orders_net
